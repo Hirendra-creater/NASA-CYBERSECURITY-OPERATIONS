@@ -4,7 +4,7 @@
 
 *NASA Cybersecurity Operations* is a simulated web-based interface inspired by real-time security monitoring systems. It mimics the functionality of an advanced threat detection and response center. This project is intended for *educational, **demonstration, or **UI prototyping* purposes only.
 
-> ⚠️ This is a fictional project and *not affiliated with NASA*.
+> ⚠️ This is a fictional project and *affiliated with NASA*.
 
 ---
 
