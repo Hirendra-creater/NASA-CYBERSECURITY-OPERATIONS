@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Advanced Threat Detection System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        :root {
+            --nasa-blue: #0b3d91;
+            --alert-red: #e63946;
+            --secure-green: #2a9d8f;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #000;
+            color: #0f0;
+            overflow-x: hidden;
+        }
+        
+        .terminal-text {
+            text-shadow: 0 0 5px #0f0;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+        
+        .scan-animation {
+            animation: scan 8s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .alert-flash {
+            animation: flash 1.5s infinite alternate;
+        }
+        
+        @keyframes flash {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        
+        .spinner {
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-black text-green-500 p-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- System Header -->
+        <header class="border-b border-green-500 pb-4 mb-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/783962f2-3daa-4d46-960c-441a39a7a30c.png" 
+                         alt="NASA logo in glowing green on black background" 
+                         class="w-12 h-12">
+                    <h1 class="text-3xl font-bold terminal-text">NASA CYBERSECURITY OPERATIONS</h1>
+                </div>
+                <div class="text-sm">
+                    <div class="flex items-center">
+                        <span class="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                        <span>SECURE CONNECTION</span>
+                    </div>
+                    <div id="datetime" class="text-right mt-1"></div>
+                </div>
+            </div>
+            <p class="text-sm mt-2">ADVANCED THREAT DETECTION SYSTEM v4.2.7 (ALPHA)</p>
+        </header>
+
+        <!-- Main Dashboard -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- System Status -->
+            <div class="bg-gray-900 bg-opacity-50 p-6 rounded border border-green-500 glow-effect">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                    SYSTEM STATUS
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span>Firewall Integrity:</span>
+                        <span class="text-green-500">100%</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>AI Threat Detection:</span>
+                        <span class="text-green-500">ACTIVE</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Remote Access:</span>
+                        <span class="text-red-500">LOCKED</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Last Intrusion Attempt:</span>
+                        <span class="text-green-500">3.7 HOURS AGO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Threat Map -->
+            <div class="bg-gray-900 bg-opacity-50 p-6 rounded border border-green-500 glow-effect lg:col-span-2 relative overflow-hidden">
+                <div class="absolute inset-0 scan-animation opacity-20">
+                    <div class="w-full h-px bg-green-500"></div>
+                </div>
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="inline-block w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                    GLOBAL THREAT MAP
+                </h2>
+                <div class="grid grid-cols-3 gap-4 z-10 relative">
+                    <div class="bg-black bg-opacity-70 p-4 rounded border border-green-500">
+                        <div class="flex justify-between items-center mb-2">
+                            <span>US WEST</span>
+                            <span class="text-xs px-2 py-1 rounded-full bg-yellow-500 text-black">MODERATE</span>
+                        </div>
+                        <div class="text-sm">
+                            <p>12 active probes</p>
+                            <p>3 blocked</p>
+                        </div>
+                    </div>
+                    <div class="bg-black bg-opacity-70 p-4 rounded border border-green-500">
+                        <div class="flex justify-between items-center mb-2">
+                            <span>EUROPE</span>
+                            <span class="text-xs px-2 py-1 rounded-full bg-green-500 text-black">LOW</span>
+                        </div>
+                        <div class="text-sm">
+                            <p>7 active probes</p>
+                            <p>0 blocked</p>
+                        </div>
+                    </div>
+                    <div class="bg-black bg-opacity-70 p-4 rounded border border-green-500 alert-flash">
+                        <div class="flex justify-between items-center mb-2">
+                            <span>ASIA-PAC</span>
+                            <span class="text-xs px-2 py-1 rounded-full bg-red-500 text-black">CRITICAL</span>
+                        </div>
+                        <div class="text-sm">
+                            <p>47 active probes</p>
+                            <p>18 blocked</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b0d57798-2b53-4ca6-a864-c19b56c975f7.png" 
+                         alt="Interactive world map showing threat heatmap with red hotspots in Asia, yellow in North America, and green in Europe and Africa" 
+                         class="w-full h-48 object-cover border border-green-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- Black Hat Detector Section -->
+        <div class="bg-gray-900 bg-opacity-50 p-6 rounded border border-green-500 glow-effect mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <span class="inline-block w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                ADVANCED THREAT DETECTOR (PYTHON BACKEND)
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Detection Interface -->
+                <div>
+                    <div class="mb-4 space-y-4">
+                        <div>
+                            <label class="block text-sm mb-1">TARGET IP/URL</label>
+                            <input type="text" 
+                                   id="targetInput" 
+                                   class="w-full bg-black border border-green-500 px-3 py-2 text-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                   placeholder="Enter suspicious IP or URL">
+                        </div>
+                        <div>
+                            <label class="block text-sm mb-1">DETECTION DEPTH</label>
+                            <select id="depthSelect" class="w-full bg-black border border-green-500 px-3 py-2 text-green-500 focus:outline-none focus:ring-1 focus:ring-green-500">
+                                <option value="1">Surface Scan</option>
+                                <option value="2">Deep Scan</option>
+                                <option value="3">Forensic Analysis</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button id="scanButton" class="w-full bg-red-500 hover:bg-red-600 text-black font-bold py-3 px-4 border-b-4 border-red-700 hover:border-red-700 rounded transition-all duration-200 flex items-center justify-center">
+                                INITIATE THREAT SCAN
+                                <svg id="scanSpinner" class="hidden ml-2 spinner w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-black bg-opacity-70 border border-green-500 rounded">
+                        <h3 class="font-bold mb-2">PYTHON DETECTION SCRIPT (SIMULATED)</h3>
+                        <pre class="text-xs bg-black p-3 overflow-x-auto"><code># NASA BLACK HAT DETECTOR v4.2.7
+import sys
+from security_library import QuantumThreatAnalyzer
+
+def analyze_target(target, depth=1):
+    analyzer = QuantumThreatAnalyzer()
+    try:
+        # Initialize connection masking
+        analyzer.mask_connection(source="NASA-SEC-OPS-ALPHA")
+        
+        # Begin threat analysis
+        results = analyzer.scan(
+            target=target,
+            depth=depth,
+            signatures=["black_hat_patterns_v4.2", "zero_day_v3.8"],
+            heuristic_level=9
+        )
+        
+        return {
+            'status': 'success',
+            'threat_level': results.threat_level,
+            'indicators': results.indicators,
+            'confidence': results.confidence,
+            'suggested_actions': results.suggested_actions
+        }
+    except Exception as e:
+        return {
+            'status': 'error',
+            'message': str(e)
+        }
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python detector.py [TARGET] [DEPTH=1]")
+        sys.exit(1)
+    
+    target = sys.argv[1]
+    depth = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+    report = analyze_target(target, depth)
+    
+    # Output JSON report
+    import json
+    print(json.dumps(report, indent=2))</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Results Panel -->
+                <div class="bg-black bg-opacity-80 p-4 border border-green-500 rounded-lg">
+                    <h3 class="font-bold mb-2">SCAN RESULTS</h3>
+                    <div id="resultsPlaceholder" class="text-center py-16 text-gray-500">
+                        <p>AWAITING SCAN INITIATION...</p>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/284ba1a1-4af6-4163-b2e8-9345fd3ab3a7.png" 
+                             alt="Digital radar screen animation with circular scan pattern and glowing green lines, waiting for target input" 
+                             class="mt-4 mx-auto">
+                    </div>
+                    <div id="scanResults" class="hidden space-y-4 overflow-y-auto max-h-96">
+                        <!-- Results will be injected here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Activity Log -->
+        <div class="bg-gray-900 bg-opacity-50 p-4 rounded border border-green-500 glow-effect">
+            <h2 class="text-xl font-bold mb-2 flex items-center">
+                <span class="inline-block w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+                SYSTEM ACTIVITY LOG
+            </h2>
+            <div class="bg-black bg-opacity-70 p-3 h-48 overflow-y-auto font-mono text-sm">
+                <div id="activityLog">
+                    <p>[12:47:32] System initialized. Security protocols enabled.</p>
+                    <p>[12:47:35] Quantum encryption channels established.</p>
+                    <p>[12:48:01] AI threat models loaded (v4.2.7).</p>
+                    <p>[12:48:45] Blocked 3 intrusion attempts from 192.168.3.1.</p>
+                    <p>[12:49:12] Updated global threat database (2,347 new signatures).</p>
+                    <p>[12:50:58] Firewall rule #847 triggered (blocked).</p>
+                    <p>[12:51:23] Scanning subroutines loaded.</p>
+                    <p>[12:52:41] Authenticated user: SECURITY_OFFICER_ALPHA</p>
+                    <p>[12:53:09] Subroutine DRACO-7 activated.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-8 pt-4 border-t border-green-500 text-xs text-gray-500 text-center">
+            <p>NASA CYBERSECURITY DIVISION | TOP SECRET CLEARANCE REQUIRED | ALL ACTIVITIES LOGGED</p>
+            <p class="mt-1">Unauthorized access prohibited under 18 U.S. Code § 1030</p>
+        </footer>
+    </div>
+
+    <script>
+        // Update datetime
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZoneName: 'short'
+            };
+            document.getElementById('datetime').textContent = now.toLocaleDateString('en-US', options);
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+        
+        // Simulate scan functionality
+        document.getElementById('scanButton').addEventListener('click', function() {
+            const target = document.getElementById('targetInput').value.trim();
+            const depth = document.getElementById('depthSelect').value;
+            const button = this;
+            const spinner = document.getElementById('scanSpinner');
+            
+            if (!target) {
+                addLogEntry("SCAN ERROR: No target specified", "error");
+                return;
+            }
+            
+            // Show loading state
+            button.disabled = true;
+            spinner.classList.remove('hidden');
+            
+            // Hide placeholder, show results container
+            document.getElementById('resultsPlaceholder').classList.add('hidden');
+            document.getElementById('scanResults').classList.remove('hidden');
+            document.getElementById('scanResults').innerHTML = '';
+            
+            // Add initial log entry
+            addLogEntry(`Initiating threat scan for: ${target} (Depth: ${depth})`, "info");
+            
+            // Simulate scan progress
+            setTimeout(() => {
+                addScanResult("Establishing secure connection...", "process");
+                setTimeout(() => {
+                    addScanResult("Analyzing network patterns...", "process");
+                    setTimeout(() => {
+                        addScanResult("Scanning for known signatures...", "process");
+                        setTimeout(() => {
+                            addScanResult("Running heuristic analysis...", "process");
+                            setTimeout(() => {
+                                // Generate random threat level (25% chance of high threat)
+                                const threatLevel = Math.random() < 0.25 ? "HIGH" : 
+                                                   Math.random() < 0.5 ? "MEDIUM" : "LOW";
+                                
+                                // Generate fake indicators
+                                const indicators = [];
+                                if (threatLevel === "HIGH") {
+                                    indicators.push("KNOWN_BLACK_HAT_PATTERN");
+                                    indicators.push("MALICIOUS_PAYLOAD_DETECTED");
+                                    indicators.push("COMMAND_INJECTION_ATTEMPT");
+                                } else if (threatLevel === "MEDIUM") {
+                                    indicators.push("SUSPICIOUS_ACTIVITY");
+                                    indicators.push("POSSIBLE_PROBE");
+                                } else {
+                                    indicators.push("CLEAN");
+                                }
+                                
+                                // Show results
+                                addScanResult(`Threat level: <span class="font-bold ${threatLevel === 'HIGH' ? 'text-red-500' : threatLevel === 'MEDIUM' ? 'text-yellow-500' : 'text-green-500'}">${threatLevel}</span>`, "result");
+                                addScanResult(`Confidence: ${Math.floor(Math.random() * 40) + 60}%`, "result");
+                                addScanResult(`Indicators found: ${indicators.length}`, "result");
+                                
+                                indicators.forEach(ind => {
+                                    addScanResult(`- ${ind}`, "indicator");
+                                });
+                                
+                                // Add log entry
+                                addLogEntry(`Scan completed for ${target}: Threat level ${threatLevel}`, 
+                                          threatLevel === "HIGH" ? "alert" : "info");
+                                
+                                // Reset button
+                                button.disabled = false;
+                                spinner.classList.add('hidden');
+                            }, 800);
+                        }, 900);
+                    }, 1000);
+                }, 800);
+            }, 500);
+        });
+        
+        function addScanResult(text, type) {
+            const resultsDiv = document.getElementById('scanResults');
+            const p = document.createElement('p');
+            
+            p.className = type === "process" ? "text-gray-400 animate-pulse" : 
+                          type === "indicator" ? "text-red-400 pl-4" :
+                          "text-green-400";
+            p.innerHTML = `[${new Date().toLocaleTimeString()}] ${text}`;
+            
+            resultsDiv.appendChild(p);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+        
+        function addLogEntry(text, type) {
+            const logDiv = document.getElementById('activityLog');
+            const p = document.createElement('p');
+            
+            p.className = type === "alert" ? "text-red-400" : 
+                          type === "error" ? "text-red-500" : 
+                          type === "info" ? "text-blue-400" : "text-gray-400";
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
+            
+            logDiv.appendChild(p);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        // Simulate periodic log updates
+        setInterval(() => {
+            const logs = [
+                "Performing routine network health check...",
+                "Scanning perimeter defenses...",
+                "Verifying encryption protocols...",
+                "Checking satellite uplink integrity...",
+                "Updating threat signatures database..."
+            ];
+            
+            if (Math.random() > 0.7) {
+                addLogEntry(logs[Math.floor(Math.random() * logs.length)], "info");
+            }
+        }, 15000);
+    </script>
+</body>
+</html>
+
