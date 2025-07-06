@@ -1,4 +1,4 @@
-# 🛰️ NASA Cybersecurity Operations Dashboard
+# 🛰️ NASA Cybersecurity Operations 
 
 ## Overview
 
